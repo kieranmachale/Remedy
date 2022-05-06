@@ -1,0 +1,111 @@
+###error wrong role
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "hello@gmail.com",
+  "password": "boo",
+  "role": "0"
+}
+
+
+###error wrong email   : should return a 400
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "hello.com",
+  "password": "boo",
+  "role": "active"
+}
+### good register active
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "hello@gmail.com",
+  "password": "boo",
+  "role": "active"
+}
+### wrong email already exist
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "hello@gmail.com",
+  "password": "boo",
+  "role": "active"
+}
+### good register passive
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "hello1@gmail.com",
+  "password": "boo",
+  "role": "passive"
+}
+###
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email":"zhsfq@gmail.com",
+  "password":"qwerty"
+
+}
+> {%
+ client.global.set("jwt", response.body.token);
+ %}
+
+###
+GET {{baseUrl}}/api/user/
+Content-Type: application/json
+
+###
+GET {{baseUrl}}/api/user/1
+Content-Type: application/json
+
+###
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "hello@gmail.com",
+  "password": "boo",
+  "role": "customer"
+}
+
+###
+DELETE {{baseUrl}}/api/user/4
+Content-Type: application/json
+
+###
+
+POST {{baseUrl}}/api/user/link/request
+Content-Type: application/json
+
+{
+  "uid_linked": 1,
+  "uid_linker": 2
+}
+
+###
+PATCH {{baseUrl}}/api/user/link/validate
+Content-Type: application/json
+
+{
+  "uid_linked": 1,
+  "uid_linker": 2,
+  "verified": "false"
+}
+
+###
+DELETE {{baseUrl}}/api/user/link/remove
+Content-Type: application/json
+
+{
+  "uid_linked": 1,
+  "uid_linker": 2
+}
+###
